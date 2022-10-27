@@ -5,6 +5,7 @@
 # Author: Gedeon
 #-----------------------------------------------------------------------
 
+import flask
 import os
 import time
 from flask import Flask, request, make_response, redirect, url_for
@@ -19,8 +20,17 @@ app = flask.Flask(__name__, template_folder='.')
 app.secret_key = os.environ['APP_SECRET_KEY']
 
 
+#-----------------------------------------------------------------------
 
-# ----------------------------------------------------------------------
+@app.route('/', methods=['GET'])
+@app.route('/index', methods=['GET'])
+def index():
+
+    html_code = flask.render_template('index.html')
+    response = flask.make_response(html_code)
+    return response
+
+#-----------------------------------------------------------------------
 
 @app.route('/profilePage', methods=['GET', 'POST'])
 def profilePageTemplate():
