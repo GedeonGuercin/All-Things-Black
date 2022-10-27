@@ -1,1 +1,28 @@
+#!/usr/bin/env python
 
+#-----------------------------------------------------------------------
+# runserver.py
+# Author: Gedeon, Yenet, Donald
+#-----------------------------------------------------------------------
+
+from sys import argv, exit, stderr
+from AllThingsBlack import app
+
+def main(argv):
+
+    if len(argv) != 2:
+        print('Usage: ' + argv[0] + ' port missing', file=stderr)
+        exit(1)
+     
+    try:
+        port = int(argv[1])
+
+    except:
+        print('Port must be an integer.', file=stderr)
+        exit(1)
+         
+    app.run(host='0.0.0.0', port=port, debug=True)
+
+#-------------------------------------------------------------------
+if __name__ == '__main__':
+    main(argv)

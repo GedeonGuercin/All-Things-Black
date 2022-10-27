@@ -20,7 +20,6 @@ app.secret_key = os.environ['APP_SECRET_KEY']
 
 
 
-
 # ----------------------------------------------------------------------
 
 @app.route('/profilePage', methods=['GET', 'POST'])
