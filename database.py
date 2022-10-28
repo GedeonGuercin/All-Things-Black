@@ -8,8 +8,8 @@
 import sys
 
 import sqlite3
-import sqlalchemy
-import sqlalchemy.orm
+#import sqlalchemy
+#import sqlalchemy.orm
 
 import database
 
