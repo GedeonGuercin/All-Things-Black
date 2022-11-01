@@ -1,13 +1,71 @@
 <!DOCTYPE html>
  <html>
    <head>
-      <title>All Things Black</title>
-      </head>
-   <body>
-      <h1>Welcome to All Things Black</h1>
-      <br>
+      <style>
+         .center{
+            position: relative; 
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); */
+
+            }
+
+         .center::before {
+            content: "";
+            /* background-color: black; */
+            background-image: url('static/IMG-6047.jpg');
+            background-repeat: no-repeat;
+            /* background-attachment: fixed; */
+            /* background-position: center; */
+            /* opacity: 0.6; */
+            background-size: cover;
+            /* background-size: cover; */
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            opacity: 0.6;
+            }
+
+         h1 {
+            text-align: center;
+            color:#d1560f;
+            font-weight: 500;
+            font: Times New Roman;
+            position: relative;
+            font-size: 7rem;
+            line-height: 0.9;
+
+            }
+
+         h2 {
+            position: relative;
+            text-align: center;
+            color:#70073a;
+            }
+      </style>
+      <!-- <link rel="style" href="style.css"> -->
+      <title> All Things Black</title>
+   </head>
+   <body class = "center">
+      <!-- <img src="{url_for('static',filename='homepage.png')}}"> -->
+      <div>
+         <h1 >Welcome to <strong>All Things Black</strong></h1>
+         <h2>Click here to <a href="profilePage">Log in</a>.<br></h2>
+         </p>
+      </div>
+      <!-- <br>
       Click here to <a href="profilePage">begin</a>.<br>
-      <br>
+      <br> -->
       {% include 'footer.html' %}
    </body>
  </html>

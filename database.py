@@ -15,7 +15,7 @@ import database
 
 #-----------------------------------------------------------------------
 
-DATABASE_URL = 'file:bookstore.sqlite?mode=rwc'
+DATABASE_URL = 'file:penny.sqlite?mode=rwc'
 
 def main():
 
