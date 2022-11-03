@@ -50,22 +50,59 @@
          h2 {
             position: relative;
             text-align: center;
-            color:#70073a;
-            }
+            color:#000000;
+            font-size: 30px;
+         }
+
+         .topnav {
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background-color: rgba(106, 106, 106, 0.54);
+         }
+
+         .topnav a {
+            position: relative;
+            /* float: center; */
+            color: #000000;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 25px;
+         }
+
+         .topnav a:hover {
+            position: relative;
+            background-color: #ddd;
+            color: black;
+         }
+
+         .topnav a.active {
+            position: relative;
+            background-color: #c77829;
+            color: white;
+         }
+
+         .topnav-right {
+            position: relative;
+            float: right;
+         }
       </style>
       <!-- <link rel="style" href="style.css"> -->
       <title> All Things Black</title>
    </head>
    <body class = "center">
-      <!-- <img src="{url_for('static',filename='homepage.png')}}"> -->
       <div>
+         <h2>Hello, username</h2>
          <h1 >Welcome to <strong>All Things Black</strong></h1>
-         <h2>Click here to <a href="profilePage">Log in</a>.<br></h2>
-         </p>
+         <div class = "topnav">
+            <a class="active" href="/index"> Home </a>
+            <a href="/beauty"> Beauty </a>
+            <a href="/events"> Events </a>
+            <a href="/food"> Food </a>
+            <a href="/aboutUs"> About Us </a>
+         </div>
       </div>
-      <!-- <br>
-      Click here to <a href="profilePage">begin</a>.<br>
-      <br> -->
       {% include 'footer.html' %}
    </body>
  </html>

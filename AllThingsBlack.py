@@ -63,14 +63,39 @@ def search_results():
 
 @app.route('/aboutUs', methods=['GET'])
 def aboutUsTemplate():
-	username = auth().authenticate()
-	username = username.strip()
+	# username = auth().authenticate()
+	# username = username.strip()
 	# client_token = generate_client_token()
 
-	html = render_template(
-		'aboutUs.html', username=username)
+	# html = flask.render_template(
+	# 	'aboutUs.html', username=username)
+	html = flask.render_template('aboutUs.html')
 
 	response = make_response(html)
 	return response
 
 #-----------------------------------------------------------------------
+
+@app.route('/beauty', methods=['GET'])
+def beautyTemplate():
+	html = flask.render_template('beautypage.html')
+
+	response = make_response(html)
+	return response
+#-----------------------------------------------------------------------
+
+@app.route('/events', methods=['GET'])
+def eventsTemplate():
+	html = flask.render_template('eventspage.html')
+
+	response = make_response(html)
+	return response
+	
+#-----------------------------------------------------------------------
+
+@app.route('/food', methods=['GET'])
+def foodTemplate():
+	html = flask.render_template('foodpage.html')
+
+	response = make_response(html)
+	return response
