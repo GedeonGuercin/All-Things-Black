@@ -17,7 +17,7 @@ import auth
 
 app = flask.Flask(__name__, template_folder='.')
 
-#app.secret_key = os.environ['APP_SECRET_KEY']
+app.secret_key = 'guercin'
 
 
 #-----------------------------------------------------------------------
@@ -36,7 +36,9 @@ def logoutcas():
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
 def index():
-    html_code = flask.render_template('index.html')
+    username = auth.authenticate()
+    html_code = flask.render_template('index.html',
+        username=username)
     response = flask.make_response(html_code)
     return response
 
@@ -44,13 +46,12 @@ def index():
 
 @app.route('/profilePage', methods=['GET', 'POST'])
 def profilePageTemplate():
-	#username = auth().authenticate()
-	html_code = flask.render_template('profilePage.html')
-	#username = username.strip()
-	#classYear = request.args.get('classYear')
-	#major= request.args.get('major')
-	response = flask.make_response(html_code)
-	return response
+    username = auth.authenticate()
+
+    html_code = flask.render_template('profilePage.html',
+        username=username)
+    response = flask.make_response(html_code)
+    return response
 	
 
 #-----------------------------------------------------------------------
