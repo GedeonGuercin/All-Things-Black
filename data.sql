@@ -1,10 +1,10 @@
-DROP TABLE IF EXISTS books;
+DROP TABLE IF EXISTS users;
 
-CREATE TABLE user (UserName TEXT, major TEXT, classYear REAL);
+CREATE TABLE users (username TEXT, major TEXT, classYear REAL);
 
-INSERT INTO user (author, title, price)
+INSERT INTO users (username, major, classYear)
    VALUES ('Gedeon Guercin','COS',2024);
-INSERT INTO user (author, title, price)
+INSERT INTO users (username, major, classYear)
    VALUES ('Yenet Tafesse','COS',2024);
-INSERT INTO user (author, title, price)
+INSERT INTO users (username, major, classYear)
    VALUES ('Donald Kipkulei','COS',2024);
