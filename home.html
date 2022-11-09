@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Make A Post!</title>
+    </head>
+    {% include 'navbar.html' %}
+    <body>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <p>All Posts</p>
+        <form action="/post" method="GET">
+            <button><i class="fa fa-plus"></i> Add Post</button>
+        </form>
+    </body>
+</html>

@@ -61,6 +61,12 @@ def search_results():
     username = auth().authenticate()
 
 # ----------------------------------------------------------------------
+@app.route('/home', methods=['GET'])
+def homeTemplate():
+	html = flask.render_template('home.html')
+
+	response = make_response(html)
+	return response
 
 @app.route('/aboutUs', methods=['GET'])
 def aboutUsTemplate():
@@ -76,9 +82,15 @@ def aboutUsTemplate():
 	return response
 
 #-----------------------------------------------------------------------
+@app.route('/post', methods=['GET'])
+def makeaPost():
+	html_code = flask.render_template('makeApost.html')
+	response = make_response(html_code)
+	return response
 
 @app.route('/beauty', methods=['GET'])
 def beautyTemplate():
+
 	html = flask.render_template('beautypage.html')
 
 	response = make_response(html)
