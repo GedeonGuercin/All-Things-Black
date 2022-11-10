@@ -65,7 +65,6 @@ def search_results():
     posts = database.getData(title) # Exception handling omitted                                                                                                                                   
 
     html_code = flask.render_template('searchresults.html',
-        username=username,
         title=title,
         posts=posts)
     response = flask.make_response(html_code)
