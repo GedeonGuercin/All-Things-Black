@@ -8,8 +8,9 @@
 import flask
 import os
 import time
-from flask import Flask, request, make_response, redirect, url_for
-
+from flask import Flask, render_template, request, make_response, redirect, url_for
+from sys import stderr, argv
+import database
 import auth
 
 #-----------------------------------------------------------------------
@@ -58,7 +59,17 @@ def profilePageTemplate():
 
 @app.route('/searchresults', methods=['GET'])
 def search_results():
-    username = auth().authenticate()
+
+    title = flask.request.args.get('title')
+
+    posts = database.getData(title) # Exception handling omitted                                                                                                                                   
+
+    html_code = flask.render_template('searchresults.html',
+        username=username,
+        title=title,
+        posts=posts)
+    response = flask.make_response(html_code)
+    return response
 
 # ----------------------------------------------------------------------
 @app.route('/home', methods=['GET'])
