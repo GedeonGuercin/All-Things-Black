@@ -62,18 +62,20 @@ def search_results():
 
     title = flask.request.args.get('title')
 
-    posts = database.getData(title) # Exception handling omitted                                                                                                                                   
+    users = database.getData(False) # Exception handling omitted                                                                                                                                   
 
     html_code = flask.render_template('searchresults.html',
         title=title,
-        posts=posts)
+        posts=users)
     response = flask.make_response(html_code)
     return response
 
 # ----------------------------------------------------------------------
 @app.route('/home', methods=['GET'])
 def homeTemplate():
-	html = flask.render_template('home.html')
+	title = flask.request.args.get('title')
+	posts =  database.getData(True)
+	html = flask.render_template('home.html', posts=posts)
 
 	response = make_response(html)
 	return response
@@ -94,6 +96,11 @@ def aboutUsTemplate():
 #-----------------------------------------------------------------------
 @app.route('/post', methods=['GET'])
 def makeaPost():
+	title = flask.request.args.get('title')
+	post = flask.request.args.get('post')
+	print(title)
+	print(post)
+
 	html_code = flask.render_template('makeApost.html')
 	response = make_response(html_code)
 	return response

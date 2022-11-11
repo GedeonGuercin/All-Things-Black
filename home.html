@@ -6,7 +6,22 @@
     {% include 'navbar.html' %}
     <body>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <p>All Posts</p>
+        {% for element in posts %}
+           <tr>
+            <td>
+                {{element[0]}}
+            </td>
+            <br>
+            <td>
+                {{element[1]}}
+            </td>
+            <td>
+                {{element[2]}}
+                <br>
+                <br>
+            </td>
+           </tr>
+        {% endfor %}
         <form action="/post" method="GET">
             <button><i class="fa fa-plus"></i> Add Post</button>
         </form>
