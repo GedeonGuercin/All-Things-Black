@@ -38,8 +38,7 @@ def logoutcas():
 @app.route('/index', methods=['GET'])
 def index():
     username = auth.authenticate()
-    html_code = flask.render_template('index.html',
-        username=username)
+    html_code = flask.render_template('index.html', username=username)
     response = flask.make_response(html_code)
     return response
 
@@ -49,8 +48,7 @@ def index():
 def profilePageTemplate():
     username = auth.authenticate()
 
-    html_code = flask.render_template('profilePage.html',
-        username=username)
+    html_code = flask.render_template('profilePage.html', username=username)
     response = flask.make_response(html_code)
     return response
 	
@@ -73,7 +71,7 @@ def search_results():
 # ----------------------------------------------------------------------
 @app.route('/home', methods=['GET'])
 def homeTemplate():
-	title = flask.request.args.get('title')
+	# title = flask.request.args.get('title')
 	posts =  database.getData(True)
 	html = flask.render_template('home.html', posts=posts)
 

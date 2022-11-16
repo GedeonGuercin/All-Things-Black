@@ -28,14 +28,14 @@ def getData(type):
 
             with sqlalchemy.orm.Session(engine) as session:
 
-                query_str = "SELECT title, posts, tag FROM posts "
+                query_str = "SELECT title, post, tag FROM posts "
                 row  = session.execute(query_str)
                 item = row.fetchone()
-                print(row)
+                
                 print(item)
                 while item is not None:
                     posts.append(item)
-                    print(posts)
+                    print(item)
                     item = row.fetchone()
                 # sqlalchemy.schema.MetaData.drop_all(bind=engine, checkfirst=True)
                 # sqlalchemy.schema.MetaData.create_all(bind=engine, checkfirst=True)
