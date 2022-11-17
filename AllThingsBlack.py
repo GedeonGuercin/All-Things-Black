@@ -103,6 +103,14 @@ def makeaPost():
 	response = make_response(html_code)
 	return response
 
+@app.route('/addpost', methods=['GET'])
+def addPost():
+	title = flask.request.form.get('title')
+	body = flask.request.form.get('body')
+	tag = flask.request.form.get('tag')
+
+	database.insertData(title, body, tag)
+
 @app.route('/beauty', methods=['GET'])
 def beautyTemplate():
 	posts = database.getData('beauty')

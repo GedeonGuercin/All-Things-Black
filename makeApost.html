@@ -30,22 +30,22 @@
         </form> -->
         <div action="javascript:history.back()" class="fluid-container" style="padding: 10px">
             <!-- new post form -->
-            <form method="POST">
+            <form action="/addpost" method="POST">
               <br>
               <h3>Title:</h3>
-              <textarea name="content" id="content" cols="30" rows="2" style="width: 20%; padding: 15px" maxlength="500" autofocus="" required="" spellcheck="false"></textarea>
+              <textarea name="title" id="title" cols="30" rows="2" style="width: 20%; padding: 15px" maxlength="500" autofocus="" required="" spellcheck="false"></textarea>
               <br>
               <br>
               <h3>Post</h3>
-              <textarea name="tags" id="tags" cols="30" rows="1" style="width: 20%; padding: 15px" maxlength="200"></textarea>
+              <textarea name="body" id="body" cols="30" rows="1" style="width: 20%; padding: 15px" maxlength="200"></textarea>
               <br>
               <h3>Tag</h3>
-              <select id="tags" name="tags">
+              <select id="tag" name="tag">
                 <option value="choose">Choose a category</option>
                 <option value="beauty">Beauty</option>
                 <option value="events">Events</option>
                 <option value="Food">Food</option>
-            </select> 
+              </select> 
       
               <br>
               <br>
@@ -58,10 +58,9 @@
               <div class="submit-button">
                 <button class="btn btn-success">Submit New Post</button>
               </div>
-              <br>
-            </form>
-      
-          </div>
+              <br>  
+            </form>    
+        </div>
     </body>
 
 
