@@ -28,11 +28,84 @@ def getData(type):
 
             with sqlalchemy.orm.Session(engine) as session:
 
-                query_str = "SELECT title, post, tag FROM posts "
+                query_str = "SELECT title, body, tag FROM posts "
                 row  = session.execute(query_str)
                 item = row.fetchone()
                 
                 print(item)
+                while item is not None:
+                    posts.append(item)
+                    print(item)
+                    item = row.fetchone()
+                # sqlalchemy.schema.MetaData.drop_all(bind=engine, checkfirst=True)
+                # sqlalchemy.schema.MetaData.create_all(bind=engine, checkfirst=True)
+
+            engine.dispose()
+        except Exception as ex:
+            print(ex, file=sys.stderr)
+            sys.exit(1)
+        return posts
+    elif type == 'beauty':
+        try:
+            posts = []
+            engine = sqlalchemy.create_engine(url=DATABASE_URL, pool_pre_ping=True)
+            
+
+            with sqlalchemy.orm.Session(engine) as session:
+
+                query_str = "SELECT * FROM posts WHERE tag = 'Beauty'"
+                row  = session.execute(query_str)
+                item = row.fetchone()
+                
+                while item is not None:
+                    posts.append(item)
+                    print(item)
+                    item = row.fetchone()
+                # sqlalchemy.schema.MetaData.drop_all(bind=engine, checkfirst=True)
+                # sqlalchemy.schema.MetaData.create_all(bind=engine, checkfirst=True)
+
+            engine.dispose()
+        except Exception as ex:
+            print(ex, file=sys.stderr)
+            sys.exit(1)
+        return posts
+    elif type == 'food':
+        try:
+            posts = []
+            engine = sqlalchemy.create_engine(url=DATABASE_URL, pool_pre_ping=True)
+            
+
+            with sqlalchemy.orm.Session(engine) as session:
+
+                query_str = "SELECT * FROM posts WHERE tag = 'Food'"
+                row  = session.execute(query_str)
+                item = row.fetchone()
+                
+   
+                while item is not None:
+                    posts.append(item)
+                    print(item)
+                    item = row.fetchone()
+                # sqlalchemy.schema.MetaData.drop_all(bind=engine, checkfirst=True)
+                # sqlalchemy.schema.MetaData.create_all(bind=engine, checkfirst=True)
+
+            engine.dispose()
+        except Exception as ex:
+            print(ex, file=sys.stderr)
+            sys.exit(1)
+        return posts
+    elif type == 'events':
+        try:
+            posts = []
+            engine = sqlalchemy.create_engine(url=DATABASE_URL, pool_pre_ping=True)
+            
+
+            with sqlalchemy.orm.Session(engine) as session:
+
+                query_str = "SELECT * FROM posts WHERE tag = 'Events'"
+                row  = session.execute(query_str)
+                item = row.fetchone()
+         
                 while item is not None:
                     posts.append(item)
                     print(item)
