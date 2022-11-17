@@ -60,25 +60,29 @@ def profilePageTemplate():
 @app.route('/searchresults', methods=['GET'])
 def search_results():
 
-    title = flask.request.args.get('title')
+	title = flask.request.args.get('title')
+	body = flask.request.args.get('body')
+	tag = flask.request.args.get('tag')
 
-    users = database.getData(False) # Exception handling omitted                                                                                                                                   
+	posts =  database.getPost()                                                                                                                                  
 
-    html_code = flask.render_template('searchresults.html',
-        title=title,
-        posts=users)
-    response = flask.make_response(html_code)
-    return response
+	html_code = flask.render_template('searchresults.html',
+        title=title,posts=posts, body=body, tag=tag)
+	
+	response = flask.make_response(html_code)
+	return response
 
 # ----------------------------------------------------------------------
+
 @app.route('/home', methods=['GET'])
 def homeTemplate():
-	title = flask.request.args.get('title')
-	posts =  database.getData(True)
+	posts =  database.getPost()
 	html = flask.render_template('home.html', posts=posts)
 
 	response = make_response(html)
 	return response
+
+# ----------------------------------------------------------------------
 
 @app.route('/aboutUs', methods=['GET'])
 def aboutUsTemplate():
@@ -94,16 +98,28 @@ def aboutUsTemplate():
 	return response
 
 #-----------------------------------------------------------------------
-@app.route('/post', methods=['GET'])
-def makeaPost():
-	title = flask.request.args.get('title')
-	post = flask.request.args.get('post')
-	print(title)
-	print(post)
 
+@app.route('/add', methods=['GET'])
+def makeaPost():
 	html_code = flask.render_template('makeApost.html')
 	response = make_response(html_code)
 	return response
+
+# ----------------------------------------------------------------------
+
+@app.route('/addresults', methods=['POST'])
+def add_results():
+
+	title = flask.request.args.get('title')
+	body = flask.request.args.get('body')
+	tag = flask.request.args.get('tag')
+
+
+	database.addPost(title, body, tag)
+	
+	return homeTemplate()
+
+#-----------------------------------------------------------------------
 
 @app.route('/beauty', methods=['GET'])
 def beautyTemplate():
@@ -112,6 +128,7 @@ def beautyTemplate():
 
 	response = make_response(html)
 	return response
+
 #-----------------------------------------------------------------------
 
 @app.route('/events', methods=['GET'])

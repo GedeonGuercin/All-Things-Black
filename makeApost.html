@@ -9,64 +9,28 @@
     </head>
     {% include 'navbar.html' %}
     <body>
-        <!-- <form action="javascript:history.back()" method="get">
-            Title:
-            <input type="text" name="title"/>
-            <br> 
-            <br>
-            Post:
-            <textarea name="post" cols="50" rows="10"></textarea>
-            <br>
-            <br>
-            Tag:
-            <select id="tags" name="tags">
-                <option value="choose">Choose a category</option>
-                <option value="beauty">Beauty</option>
-                <option value="events">Events</option>
-                <option value="Food">Food</option>
-            </select> 
-            <br>
-            <input type="Submit" name="submit" /> 
-        </form> -->
         <div action="javascript:history.back()" class="fluid-container" style="padding: 10px">
             <!-- new post form -->
-            <form method="POST">
+            <form action="/addresults" method="post">
               <br>
               <h3>Title:</h3>
-              <textarea name="content" id="content" cols="30" rows="2" style="width: 20%; padding: 15px" maxlength="500" autofocus="" required="" spellcheck="false"></textarea>
+              <input type="text" name="title" autofocus >
               <br>
-              <br>
-              <h3>Post</h3>
-              <textarea name="tags" id="tags" cols="30" rows="1" style="width: 20%; padding: 15px" maxlength="200"></textarea>
+              <h3>Body:</h3>
+              <input type="text" name="body" autofocus>
               <br>
               <h3>Tag</h3>
-              <select id="tags" name="tags">
+              <input type="text" name="tag" autofocus>
+              <br>
+              <input type="submit" value="Submit">
+              <!-- <select id="tags" name="tags">
                 <option value="choose">Choose a category</option>
                 <option value="beauty">Beauty</option>
                 <option value="events">Events</option>
                 <option value="Food">Food</option>
-            </select> 
-      
-              <br>
-              <br>
-              <h3>Add an image (JPG, PNG, or JPEG)</h3>
-              <input type="file" name="file" accept=".png, .jpg, .jpeg">
-              <br>
-              <br>
-              <br>
-      
-              <div class="submit-button">
-                <button class="btn btn-success">Submit New Post</button>
-              </div>
-              <br>
+              </select>  -->
+            <br>
             </form>
-      
           </div>
     </body>
-
-
-
-
-
-
 </html>
