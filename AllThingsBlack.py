@@ -125,7 +125,10 @@ def eventsTemplate():
 
 @app.route('/food', methods=['GET'])
 def foodTemplate():
-	html = flask.render_template('foodpage.html')
+	title = flask.request.args.get('title')
+	posts =  database.getFoodposts()
+	html = flask.render_template('foodpage.html', posts=posts)
+	# html = flask.render_template('foodpage.html')
 
 	response = make_response(html)
 	return response

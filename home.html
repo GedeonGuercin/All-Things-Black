@@ -13,7 +13,7 @@
         {% include 'navbar.html' %}
 
     <div class="container-fluid text-center pb-1" style="background-color:orange; color:white">
-        <h1>Food</h1>
+        <h1>Home</h1>
      </div>
 
     <div class = "row">
@@ -21,7 +21,7 @@
         <h3>Posts</h3>
         <table class="table table-striped">
             {% for element in posts %}
-           <tr>
+            <tr>
             <td>
                 {{element[0]}}
             </td>
@@ -34,15 +34,14 @@
                 <br>
                 <br>
             </td>
-           </tr>
+            </tr>
+            {% endfor %}
         </table>
-        
-        {% endfor %}
         <h4>Search Posts</h>
             <div class="col-sm-3">
               <input class="form-control" type="text" placeholder="Search for posts here" name="Search" id="dept" autofocus="">
-           </div>
-        </div>
+            </div>
+    </div>
 
     <form action="/searchresults" method="GET">
         <!-- <a href="/searchresults"> About Us </a> -->

@@ -16,6 +16,35 @@ import database
 
 DATABASE_URL = 'postgresql://rmqiknfc:7HnJzw444FmWxxE_2t_OgbVzABcY6en6@castor.db.elephantsql.com/rmqiknfc'
 
+def getFoodposts():
+    try:
+        posts = []
+        engine = sqlalchemy.create_engine(url=DATABASE_URL, pool_pre_ping=True)
+            # 'postgresql://',
+            #     creator=lambda: engine.connect(DATABASE_URL), uri=True)
+            # sqlalchemy.schema.MetaData.bind 
+
+        with sqlalchemy.orm.Session(engine) as session:
+
+            query_str = "SELECT title, body, tag FROM posts WHERE tag = Food"
+            row  = session.execute(query_str)
+            item = row.fetchone()
+            print(row)
+            print(item)
+            while item is not None:
+                posts.append(item)
+                print(posts)
+                item = row.fetchone()
+                # sqlalchemy.schema.MetaData.drop_all(bind=engine, checkfirst=True)
+                # sqlalchemy.schema.MetaData.create_all(bind=engine, checkfirst=True)
+
+            engine.dispose()
+
+    except Exception as ex:
+            print(ex, file=sys.stderr)
+            sys.exit(1)
+    return posts
+
 def getData(type):
 
     if type == True:
@@ -28,7 +57,7 @@ def getData(type):
 
             with sqlalchemy.orm.Session(engine) as session:
 
-                query_str = "SELECT title, posts, tag FROM posts "
+                query_str = "SELECT title, body, tag FROM posts "
                 row  = session.execute(query_str)
                 item = row.fetchone()
                 print(row)
@@ -89,7 +118,7 @@ def insetData(title, post, tag):
 
         with sqlalchemy.orm.Session(engine) as session:
 
-            query_str = "INSERT INTO posts (title, post, tag) VALUES (?, ?, ?) "
+            query_str = "INSERT INTO posts (title, body, tag) VALUES (?, ?, ?) "
             session.execute(query_str, title, post, tag)
             
             engine.commit()
