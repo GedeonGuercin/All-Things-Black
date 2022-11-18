@@ -37,9 +37,8 @@ def logoutcas():
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
 def index():
-    username = auth.authenticate()
-    html_code = flask.render_template('index.html',
-        username=username)
+    # username = auth.authenticate()
+    html_code = flask.render_template('index.html')
     response = flask.make_response(html_code)
     return response
 
@@ -47,10 +46,9 @@ def index():
 
 @app.route('/profilePage', methods=['GET', 'POST'])
 def profilePageTemplate():
-    username = auth.authenticate()
+    # username = auth.authenticate()
 
-    html_code = flask.render_template('profilePage.html',
-        username=username)
+    html_code = flask.render_template('profilePage.html')
     response = flask.make_response(html_code)
     return response
 	
@@ -76,7 +74,8 @@ def search_results():
 
 @app.route('/home', methods=['GET'])
 def homeTemplate():
-	posts =  database.getPost()
+	# title = flask.request.args.get('title')
+	posts =  database.getData(True)
 	html = flask.render_template('home.html', posts=posts)
 
 	response = make_response(html)
@@ -105,26 +104,18 @@ def makeaPost():
 	response = make_response(html_code)
 	return response
 
-# ----------------------------------------------------------------------
+@app.route('/addpost', methods=['GET'])
+def addPost():
+	title = flask.request.form.get('title')
+	body = flask.request.form.get('body')
+	tag = flask.request.form.get('tag')
 
-@app.route('/addresults', methods=['POST'])
-def add_results():
-
-	title = flask.request.args.get('title')
-	body = flask.request.args.get('body')
-	tag = flask.request.args.get('tag')
-
-
-	database.addPost(title, body, tag)
-	
-	return homeTemplate()
-
-#-----------------------------------------------------------------------
+	database.insertData(title, body, tag)
 
 @app.route('/beauty', methods=['GET'])
 def beautyTemplate():
-
-	html = flask.render_template('beautypage.html')
+	posts = database.getData('beauty')
+	html = flask.render_template('beautypage.html', posts=posts)
 
 	response = make_response(html)
 	return response
@@ -133,7 +124,8 @@ def beautyTemplate():
 
 @app.route('/events', methods=['GET'])
 def eventsTemplate():
-	html = flask.render_template('eventspage.html')
+	posts = database.getData('events')
+	html = flask.render_template('eventspage.html', posts=posts)
 
 	response = make_response(html)
 	return response
@@ -142,7 +134,22 @@ def eventsTemplate():
 
 @app.route('/food', methods=['GET'])
 def foodTemplate():
-	html = flask.render_template('foodpage.html')
+	posts = database.getData('food')
+	html = flask.render_template('foodpage.html', posts=posts)
 
 	response = make_response(html)
 	return response
+
+@app.route('/addresults', methods=['POST'])
+def add_results():
+
+	title = flask.request.form.get('title')
+	body = flask.request.form.get('body')
+	tag = flask.request.form.get('tag')
+	print(title)
+	print(body)
+	print(tag)
+
+	database.addPost(title, body, tag)
+	
+	return homeTemplate()
