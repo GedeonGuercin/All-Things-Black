@@ -137,3 +137,17 @@ def foodTemplate():
 
 	response = make_response(html)
 	return response
+
+@app.route('/addresults', methods=['POST'])
+def add_results():
+
+	title = flask.request.form.get('title')
+	body = flask.request.form.get('body')
+	tag = flask.request.form.get('tag')
+	print(title)
+	print(body)
+	print(tag)
+
+	database.addPost(title, body, tag)
+	
+	return homeTemplate()
