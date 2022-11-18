@@ -7,10 +7,9 @@
     <table id="post">
         {% for element in posts: %}
            <tr>
-            <td>{{element[0]}}</td>
-            <td>{{element[1]}}</td>
-            <td>{{element[2]}}</td>
-            <td>{{element[3]}}</td>
+            <td>{{element.get_title()}}</td>
+            <td>{{element.get_body()}}</td>
+            <td>{{element.get_tag()}}</td>
            </tr>
         {% endfor %}
     </table>

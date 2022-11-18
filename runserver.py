@@ -16,12 +16,15 @@ def main(argv):
      
     try:
         port = int(argv[1])
-
-    except:
+    except Exception:
         print('Port must be an integer.', file=stderr)
         exit(1)
-         
-    app.run(host='0.0.0.0', port=port, debug=True)
+
+    try:
+        app.run(host='0.0.0.0', port=port, debug=True)
+    except Exception as ex:
+        print(ex, file=stderr)
+        exit(1)
 
 #-------------------------------------------------------------------
 if __name__ == '__main__':
