@@ -8,6 +8,7 @@
 import sqlalchemy
 import sqlalchemy.orm
 import sqlalchemy.ext.declarative
+from sqlalchemy.orm import sessionmaker
 import post as postmod
 
 #-----------------------------------------------------------------------
@@ -23,8 +24,17 @@ class Post (Base):
     tag = sqlalchemy.Column(sqlalchemy.String)
 
 engine = sqlalchemy.create_engine(url=DATABASE_URL, pool_pre_ping=True)
+# Session = sessionmaker(bind=engine)
+# session = Session()
 
 #-----------------------------------------------------------------------
+
+# def __init__(self, title, body, tag):
+#         self._engine = engine
+#         self._title = title
+#         self._body = body
+#         self._tag = tag
+#         self._connection = session
 
 def getPost():
     
