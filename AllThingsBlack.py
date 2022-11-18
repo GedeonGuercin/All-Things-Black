@@ -110,10 +110,12 @@ def makeaPost():
 @app.route('/addresults', methods=['POST'])
 def add_results():
 
-	title = flask.request.args.get('title')
-	body = flask.request.args.get('body')
-	tag = flask.request.args.get('tag')
-
+	title = flask.request.form.get('title')
+	body = flask.request.form.get('body')
+	tag = flask.request.form.get('tag')
+	print(title)
+	print(body)
+	print(tag)
 
 	database.addPost(title, body, tag)
 	

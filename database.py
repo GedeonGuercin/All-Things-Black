@@ -8,7 +8,6 @@
 import sqlalchemy
 import sqlalchemy.orm
 import sqlalchemy.ext.declarative
-from sqlalchemy.orm import sessionmaker
 import post as postmod
 
 #-----------------------------------------------------------------------
@@ -24,8 +23,6 @@ class Post (Base):
     tag = sqlalchemy.Column(sqlalchemy.String)
 
 engine = sqlalchemy.create_engine(url=DATABASE_URL, pool_pre_ping=True)
-# Session = sessionmaker(bind=engine)
-# session = Session()
 
 #-----------------------------------------------------------------------
 
@@ -54,6 +51,10 @@ def addPost(title, body, tag):
     with sqlalchemy.orm.Session(engine) as session:
         row = Post(title=title, body=body, tag=tag)
         session.add(row)
+        print(row)
+        print(row.title)
+        print(row.body)
+        print(row.tag)
         try:
             session.commit()
             return True
