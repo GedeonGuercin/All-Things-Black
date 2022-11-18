@@ -58,20 +58,17 @@ def profilePageTemplate():
 @app.route('/searchresults', methods=['GET'])
 def search_results():
 
-	title = flask.request.args.get('title')
-	body = flask.request.args.get('body')
-	tag = flask.request.args.get('tag')
+    title = flask.request.args.get('title')
 
-	posts =  database.getPost()                                                                                                                                  
+    users = database.getData(False) # Exception handling omitted                                                                                                                                   
 
-	html_code = flask.render_template('searchresults.html',
-        title=title,posts=posts, body=body, tag=tag)
-	
-	response = flask.make_response(html_code)
-	return response
+    html_code = flask.render_template('searchresults.html',
+        title=title,
+        posts=users)
+    response = flask.make_response(html_code)
+    return response
 
 # ----------------------------------------------------------------------
-
 @app.route('/home', methods=['GET'])
 def homeTemplate():
 	# title = flask.request.args.get('title')
@@ -80,8 +77,6 @@ def homeTemplate():
 
 	response = make_response(html)
 	return response
-
-# ----------------------------------------------------------------------
 
 @app.route('/aboutUs', methods=['GET'])
 def aboutUsTemplate():
@@ -97,9 +92,13 @@ def aboutUsTemplate():
 	return response
 
 #-----------------------------------------------------------------------
-
-@app.route('/add', methods=['GET'])
+@app.route('/post', methods=['GET'])
 def makeaPost():
+	title = flask.request.args.get('title')
+	post = flask.request.args.get('post')
+	print(title)
+	print(post)
+
 	html_code = flask.render_template('makeApost.html')
 	response = make_response(html_code)
 	return response
@@ -119,7 +118,6 @@ def beautyTemplate():
 
 	response = make_response(html)
 	return response
-
 #-----------------------------------------------------------------------
 
 @app.route('/events', methods=['GET'])
