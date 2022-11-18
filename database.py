@@ -5,6 +5,8 @@
 # Author: Gedeon, Yenet, Donald
 #-----------------------------------------------------------------------
 
+import sys
+import contextlib
 import sqlalchemy
 import sqlalchemy.orm
 import sqlalchemy.ext.declarative
@@ -53,13 +55,15 @@ engine = sqlalchemy.create_engine(url=DATABASE_URL, pool_pre_ping=True)
 #             sys.exit(1)
 #     return posts
 
-Base = sqlalchemy.ext.declarative.declarative_base()
+def getData(type):
 
-class Post (Base):
-    __tablename__ = 'posts'
-    title =  sqlalchemy.Column(sqlalchemy.String, primary_key=True)
-    body = sqlalchemy.Column(sqlalchemy.String)
-    tag = sqlalchemy.Column(sqlalchemy.String)
+    if type == True:
+        try:
+            posts = []
+            engine = sqlalchemy.create_engine(url=DATABASE_URL, pool_pre_ping=True)
+            # 'postgresql://',
+            #     creator=lambda: engine.connect(DATABASE_URL), uri=True)
+            # sqlalchemy.schema.MetaData.bind 
 
             with sqlalchemy.orm.Session(engine) as session:
 
@@ -244,6 +248,5 @@ def addPost(title, body, tag):
             return False
 
 if __name__ == '__main__':
-    _test()
-
+    main()
 
