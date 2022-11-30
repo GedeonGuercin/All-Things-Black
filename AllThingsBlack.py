@@ -140,10 +140,16 @@ def foodTemplate():
 
 @app.route('/addresults', methods=['POST'])
 def add_results():
-
 	title = flask.request.form.get('title')
+	if (title is None) or (title == ''):
+		return 'Enter something'
 	body = flask.request.form.get('body')
+	if (body is None) or (body == ''):
+		return 'Enter something'
 	tag = flask.request.form.get('tag')
+	if (tag is None) or (tag == ''):
+		return 'Enter something'
+
 	print(title)
 	print(body)
 	print(tag)
