@@ -2,9 +2,11 @@
 <html>
     <head>
         <title>Posts</title>
-
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
     </head>
     <body>
@@ -19,28 +21,28 @@
     <div class = "container-fluid text-center pb-1" style="background-color:rgb(235, 235, 244); color:black">
         <h3>All Posts</h3>
     </div>
-    <div class = "container-fluid text-center pb-1">
-        <table class="table table-striped">
-            <tr>
-                <td><strong>Title</strong></td>
-                <td><strong>Body</strong></td>
-                <td><strong>Tag</strong></td>
-            </tr>
-            {% for element in posts %}
-            <tr>
-                <td>
-                    {{element[0]}}
-                </td>
-                <td>
-                    {{element[1]}}
-                </td>
-                <td>
-                    {{element[2]}}
-                </td>
-           </tr>
-           {% endfor %}
-        </table>
-        
+    
+    <!-- page section -->
+    <section class="page-section">
+       <div class = "container py-4 py-lg-5">
+            <div class="col-md-12"> 
+                <div id="listings">
+                    <div class="list-group">
+                        <a class="list-group-item list-group-item-action flex-column align-items-start">
+                        {% for element in posts %}    
+                        <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{element[0]}}</h5>
+                                <small>{{element[2]}}</small>
+                            </div>
+                            <p class="mb-1">{{element[1]}}</p>
+                            <br>
+                            <br>
+                            {% endfor %}   
+                        </a>
+                    </div>
+                    </div>
+            </div>
+       </div>
         <h4>Search Posts</h4>
         <div class="col-sm-3 justify-content-center">
             <input class="form-control" type="text" placeholder="Search for posts here" name="Search" id="dept" autofocus="">
@@ -56,6 +58,9 @@
                 </tr>
         </table>
         </form>
-    </div>
+    </div> 
+    </section>
+
+    
     </body>
 </html>

@@ -71,9 +71,11 @@ def search_results():
 # ----------------------------------------------------------------------
 @app.route('/home', methods=['GET'])
 def homeTemplate():
-	# title = flask.request.args.get('title')
+	title = flask.request.form.get('title')
+	body = flask.request.form.get('body')
+	tag = flask.request.form.get('tag')
 	posts =  database.getData(True)
-	html = flask.render_template('home.html', posts=posts)
+	html = flask.render_template('home.html', posts=posts, title=title, body=body,tag=tag)
 
 	response = make_response(html)
 	return response
