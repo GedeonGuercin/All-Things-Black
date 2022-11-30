@@ -14,6 +14,9 @@
     {% include 'navbar.html' %}
 
     <body>
+        <div class="container-fluid text-center pb-1" style="background-color:orange; color:white">
+          <h1>Add a Post!</h1>
+        </div>
         <div action="javascript:history.back()" class="fluid-container" style="padding: 10px">
             <!-- new post form -->
             <form action="/addresults" method="post">
@@ -32,12 +35,7 @@
               </select>
               <br>
               <input type="submit" value="Submit">
-              <!-- <select id="tags" name="tags">
-                <option value="choose">Choose a category</option>
-                <option value="beauty">Beauty</option>
-                <option value="events">Events</option>
-                <option value="Food">Food</option>
-              </select>  -->
+              
             <br>
             </form>
           </div>
