@@ -52,6 +52,11 @@ def getData():
 
 #-----------------------------------------------------------------------
 
+def deletePost():
+    with sqlalchemy.orm.Session(engine) as session:
+        session.query(Post).delete()
+        session.commit()
+
 if __name__ == '__main__':
     main()
 

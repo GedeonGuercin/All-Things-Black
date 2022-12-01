@@ -62,6 +62,8 @@ def search_results():
 
 # ----------------------------------------------------------------------
 
+#-----------------------------------------------------------------------
+
 @app.route('/aboutUs', methods=['GET'])
 def aboutUsTemplate():
 	# username = auth().authenticate()
@@ -74,6 +76,31 @@ def aboutUsTemplate():
 
 	response = make_response(html)
 	return response
+
+#-----------------------------------------------------------------------
+<<<<<<< Updated upstream
+=======
+@app.route('/post', methods=['GET'])
+def makeaPost():
+	title = flask.request.args.get('title')
+	post = flask.request.args.get('post')
+	print(title)
+	print(post)
+
+	html_code = flask.render_template('makeApost.html')
+	response = make_response(html_code)
+	return response
+
+#-----------------------------------------------------------------------
+
+@app.route('/addpost', methods=['GET'])
+def addPost():
+	title = flask.request.form.get('title')
+	body = flask.request.form.get('body')
+	tag = flask.request.form.get('tag')
+
+	database.insertData(title, body, tag)
+>>>>>>> Stashed changes
 
 #-----------------------------------------------------------------------
 
@@ -100,3 +127,35 @@ def foodTemplate():
 
 	response = make_response(html)
 	return response
+<<<<<<< Updated upstream
+=======
+
+#-----------------------------------------------------------------------
+
+@app.route('/addresults', methods=['POST'])
+def add_results():
+	title = flask.request.form.get('title')
+	if (title is None) or (title == ''):
+		return 'Enter something'
+	body = flask.request.form.get('body')
+	if (body is None) or (body == ''):
+		return 'Enter something'
+	tag = flask.request.form.get('tag')
+	if (tag is None) or (tag == ''):
+		return 'Enter something'
+
+	print(title)
+	print(body)
+	print(tag)
+
+	database.addPost(title, body, tag)
+	
+	return homeTemplate()
+
+#-----------------------------------------------------------------------
+@app.route('/delete', methods=['POST'])
+def delete_results():
+	database.deletePost()
+	
+	return homeTemplate()
+>>>>>>> Stashed changes
