@@ -57,9 +57,10 @@ def profilePageTemplate():
 
 @app.route('/delete', methods=['GET'])
 def delete():
-    html_code = flask.render_template('delete.html')
-    response = flask.make_response(html_code)
-    return response
+	posts =  database.getData(True)
+	html_code = flask.render_template('delete.html', posts=posts)
+	response = flask.make_response(html_code)
+	return response
 	
 
 #-----------------------------------------------------------------------
@@ -69,12 +70,12 @@ def deleteresult():
 	title  = flask.request.form.get('title')
 	# if (title is None) or (title.strip() == ''):
 	# 	return report_results('Missing ISBN', '')
-	title = title.strip()
-
+	# title = title.strip()
+	print(title)
 	database.delete_post(title)
 
 	message1 = 'The deletion was successful'
-	message2 = 'The database now does not contain a book with ISBN '
+	message2 = 'The database now does not contain a book with Title '
 	message2 += title
 
 	return report_results(message1, message2)

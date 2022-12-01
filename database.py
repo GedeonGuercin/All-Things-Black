@@ -73,7 +73,7 @@ def getData(type):
                 print(item)
                 while item is not None:
                     posts.append(item)
-                    print(item)
+                    print(item[0])
                     item = row.fetchone()
                 # sqlalchemy.schema.MetaData.drop_all(bind=engine, checkfirst=True)
                 # sqlalchemy.schema.MetaData.create_all(bind=engine, checkfirst=True)
