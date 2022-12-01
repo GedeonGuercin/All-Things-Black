@@ -247,6 +247,11 @@ def addPost(title, body, tag):
         except sqlalchemy.exc.IntegrityError:
             return False
 
+def delete_post(title):
+    with sqlalchemy.orm.Session(engine) as session:
+        session.query(Post).filter(Post.title==title).delete()
+        session.commit()
+
 if __name__ == '__main__':
     main()
 

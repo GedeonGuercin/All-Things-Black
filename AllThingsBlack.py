@@ -37,8 +37,8 @@ def logoutcas():
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
 def index():
-    username = auth.authenticate()
-    html_code = flask.render_template('index.html', username=username)
+    # username = auth.authenticate()
+    html_code = flask.render_template('index.html')
     response = flask.make_response(html_code)
     return response
 
@@ -46,14 +46,50 @@ def index():
 
 @app.route('/profilePage', methods=['GET', 'POST'])
 def profilePageTemplate():
-    username = auth.authenticate()
+    # username = auth.authenticate()
 
-    html_code = flask.render_template('profilePage.html', username=username)
+    html_code = flask.render_template('profilePage.html')
     response = flask.make_response(html_code)
     return response
 	
 
 #-----------------------------------------------------------------------
+
+@app.route('/delete', methods=['GET'])
+def delete():
+    html_code = flask.render_template('delete.html')
+    response = flask.make_response(html_code)
+    return response
+	
+
+#-----------------------------------------------------------------------
+
+@app.route('/deleteresults', methods=['POST'])
+def deleteresult():
+	title  = flask.request.form.get('title')
+	# if (title is None) or (title.strip() == ''):
+	# 	return report_results('Missing ISBN', '')
+	title = title.strip()
+
+	database.delete_post(title)
+
+	message1 = 'The deletion was successful'
+	message2 = 'The database now does not contain a book with ISBN '
+	message2 += title
+
+	return report_results(message1, message2)
+	
+
+#-----------------------------------------------------------------------
+
+def report_results(message1, message2):                                                                                                                                  
+
+    html_code = flask.render_template('reportresults.html',
+        message1=message1,message2=message2)
+    response = flask.make_response(html_code)
+    return response
+
+# ----------------------------------------------------------------------
 
 @app.route('/searchresults', methods=['GET'])
 def search_results():
