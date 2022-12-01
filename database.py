@@ -6,7 +6,6 @@
 #-----------------------------------------------------------------------
 
 import sys
-import contextlib
 import sqlalchemy
 import sqlalchemy.orm
 import sqlalchemy.ext.declarative

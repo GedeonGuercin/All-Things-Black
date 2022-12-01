@@ -17,48 +17,43 @@
         <h1>Beauty</h1>
         </div>
 
-    <div class = "container-fluid text-center pb-1" style="background-color:rgb(235, 235, 244); color:black">
-        <h3>Welcome to Beauty Page!</h3>
-        <h3>Posts</h3>
-        <table class="table table-striped">
-            <tr>
-                <td><strong>Title</strong></td>
-                <td><strong>Body</strong></td>
-                <td><strong>Tag</strong></td>
-            </tr>
-            {% for element in posts %}
-            <tr>
-                <td>
-                    {{element[0]}}
-                </td>
-                <br>
-                <td>
-                    {{element[1]}}
-                </td>
-                <td>
-                    {{element[2]}}
-                    <br>
-                    <br>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-        <h4>Search Posts</h>
-            <div class="col-sm-3">
-                <input class="form-control" type="text" placeholder="Search for posts here" name="Search" id="dept" autofocus="">
-            </div>
-        
-
-        <form action="/searchresults" method="GET">
-            <!-- <a href="/searchresults"> About Us </a> -->
-            <table id="table">
-                <tr>
-                    <input id="submit" type="submit" value="Submit">
-                </td>
-                </tr>
-        </table>
-        </form>
-    </div>
+    <!-- page section -->
+    <section class="page-section">
+        <div class = "container py-4 py-lg-5">
+             <div class="col-md-12"> 
+                 <div id="listings">
+                     <div class="list-group">
+                         <a class="list-group-item list-group-item-action flex-column align-items-start">
+                         {% for element in posts %}    
+                         <div class="d-flex w-100 justify-content-between">
+                                 <h5 class="mb-1">{{element[0]}}</h5>
+                                 <small>{{element[2]}}</small>
+                             </div>
+                             <p class="mb-1">{{element[1]}}</p>
+                             <hr>
+                             {% endfor %}   
+                         </a>
+                     </div>
+                     </div>
+             </div>
+        </div>
+         <h4>Search Posts</h4>
+         <div class="col-sm-3 justify-content-center">
+             <input class="form-control" type="text" placeholder="Search for posts here" name="Search" id="dept" autofocus="">
+         </div>
+     
+ 
+         <form action="/searchresults" method="GET">
+             <!-- <a href="/searchresults"> About Us </a> -->
+             <table id="table">
+                 <tr>
+                     <input id="submit" type="submit" value="Submit">
+                 </td>
+                 </tr>
+         </table>
+         </form>
+     </div> 
+     </section>
     </body>
 </html>
 <!DOCTYPE html>

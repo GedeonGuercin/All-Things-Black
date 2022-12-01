@@ -107,9 +107,11 @@ def search_results():
 # ----------------------------------------------------------------------
 @app.route('/home', methods=['GET'])
 def homeTemplate():
-	# title = flask.request.args.get('title')
+	title = flask.request.form.get('title')
+	body = flask.request.form.get('body')
+	tag = flask.request.form.get('tag')
 	posts =  database.getData(True)
-	html = flask.render_template('home.html', posts=posts)
+	html = flask.render_template('home.html', posts=posts, title=title, body=body,tag=tag)
 
 	response = make_response(html)
 	return response
@@ -176,10 +178,16 @@ def foodTemplate():
 
 @app.route('/addresults', methods=['POST'])
 def add_results():
-
 	title = flask.request.form.get('title')
+	if (title is None) or (title == ''):
+		return 'Enter something'
 	body = flask.request.form.get('body')
+	if (body is None) or (body == ''):
+		return 'Enter something'
 	tag = flask.request.form.get('tag')
+	if (tag is None) or (tag == ''):
+		return 'Enter something'
+
 	print(title)
 	print(body)
 	print(tag)
