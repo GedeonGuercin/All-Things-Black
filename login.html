@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>AllThingsBlack</title>
+   </head>
+   <body>
+      <h1>Login to the Admin of All Things Black</h1>
+      <!-- Use post instead of get for security. -->
+      <form action="/handlelogin" method="post">
+         <input type="hidden" name="csrf_token"
+             value="{{csrf_token()}}">
+         <table>
+            <tr>
+               <td style="text-align:right">User name:</td>
+               <td><input type="text" name="username"
+                  required pattern="\S+"
+                  title="No white-space chars">
+               </td>
+            </tr>
+            <tr>
+               <td style="text-align:right">Password:</td>
+               <td><input type="password" name="password"
+                  required pattern="\S+"
+                  title="No white-space chars">
+               <td>
+            </tr>
+            <tr>
+               <td></td>
+               <td><input type="submit" value="Go"></td>
+            </tr>
+         </table>
+      </form>
+      <br>
+      <strong>{{error_msg}}</strong>
+   </body>
+</html>

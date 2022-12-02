@@ -6,11 +6,14 @@
 #-----------------------------------------------------------------------
 
 import flask
-import os
 import time
 from flask import Flask, request, make_response, redirect, url_for
 
 import auth
+import os
+import flask
+import flask_wtf.csrf
+import auths
 
 #-----------------------------------------------------------------------
 
@@ -19,6 +22,7 @@ app = flask.Flask(__name__, template_folder='.')
 
 app.secret_key = 'guercin'
 
+flask_wtf.csrf.CSRFProtect(app)
 
 #-----------------------------------------------------------------------
 # Routes for authentication.
@@ -31,6 +35,10 @@ def logoutapp():
 def logoutcas():
     return auth.logoutcas()
 
+@app.route('/handlelogin', methods=['POST'])
+def handle_login():
+    return auths.handle_login()
+
 #-----------------------------------------------------------------------
 
 @app.route('/', methods=['GET'])
@@ -41,6 +49,13 @@ def index():
         username=username)
     response = flask.make_response(html_code)
     return response
+
+
+#-----------------------------------------------------------------------
+
+@app.route('/admin', methods=['GET'])
+def login():
+	return auths.login()
 
 #-----------------------------------------------------------------------
 
@@ -56,6 +71,45 @@ def profilePageTemplate():
 
 #-----------------------------------------------------------------------
 
+<<<<<<< Updated upstream
+=======
+@app.route('/delete', methods=['GET'])
+def delete():
+    html_code = flask.render_template('delete.html')
+    response = flask.make_response(html_code)
+    return response
+	
+
+#-----------------------------------------------------------------------
+
+@app.route('/deleteresults', methods=['POST'])
+def deleteresult():
+	title  = flask.request.form.get('title')
+	# if (title is None) or (title.strip() == ''):
+	# 	return report_results('Missing ISBN', '')
+	title = title.strip()
+
+	database.delete_post(title)
+
+	message1 = 'The deletion was successful'
+	message2 = 'The database now does not contain a book with ISBN '
+	message2 += title
+
+	return report_results(message1, message2)
+	
+
+#-----------------------------------------------------------------------
+
+def report_results(username, message1, message2):
+
+    html_code = flask.render_template('reportresults.html',
+        username=username, message1=message1, message2=message2)
+    response = flask.make_response(html_code)
+    return response
+
+#-----------------------------------------------------------------------
+
+>>>>>>> Stashed changes
 @app.route('/searchresults', methods=['GET'])
 def search_results():
     username = auth().authenticate()
@@ -129,6 +183,8 @@ def foodTemplate():
 	return response
 <<<<<<< Updated upstream
 =======
+
+#-----------------------------------------------------------------------
 
 #-----------------------------------------------------------------------
 
