@@ -75,7 +75,7 @@ def deleteresult():
 	database.delete_post(title)
 
 	message1 = 'The deletion was successful'
-	message2 = 'The database now does not contain a book with Title '
+	message2 = 'The database now does not contain a post with Title '
 	message2 += title
 
 	return report_results(message1, message2)
