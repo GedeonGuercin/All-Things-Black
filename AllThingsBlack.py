@@ -18,7 +18,8 @@ import auth
 
 app = flask.Flask(__name__, template_folder='.')
 
-app.secret_key = 'guercin'
+#app.secret_key = '93c4828df59a50ae7ea98bbb'
+app.secret_key = os.environ['SOME_VAR']
 
 
 #-----------------------------------------------------------------------
@@ -68,9 +69,6 @@ def delete():
 @app.route('/deleteresults', methods=['POST'])
 def deleteresult():
 	title  = flask.request.form.get('title')
-	# if (title is None) or (title.strip() == ''):
-	# 	return report_results('Missing ISBN', '')
-	# title = title.strip()
 	print(title)
 	database.delete_post(title)
 
