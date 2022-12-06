@@ -15,11 +15,9 @@ import auth
 
 #-----------------------------------------------------------------------
 
-
 app = flask.Flask(__name__, template_folder='.')
 app.secret_key = '93c4828df59a50ae7ea98bbb'
 #app.secret_key = os.getenv('SOME_VAR')
-
 
 #-----------------------------------------------------------------------
 # Routes for authentication.
@@ -77,7 +75,6 @@ def deleteresult():
 
 	return report_results(message1, message2)
 	
-
 #-----------------------------------------------------------------------
 
 def report_results(message1, message2):                                                                                                                                  
@@ -103,6 +100,7 @@ def search_results():
     return response
 
 # ----------------------------------------------------------------------
+
 @app.route('/home', methods=['GET'])
 def homeTemplate():
 	title = flask.request.form.get('title')
@@ -113,6 +111,8 @@ def homeTemplate():
 
 	response = make_response(html)
 	return response
+
+#-----------------------------------------------------------------------
 
 @app.route('/aboutUs', methods=['GET'])
 def aboutUsTemplate():
@@ -128,6 +128,7 @@ def aboutUsTemplate():
 	return response
 
 #-----------------------------------------------------------------------
+
 @app.route('/post', methods=['GET'])
 def makeaPost():
 	title = flask.request.args.get('title')
@@ -139,6 +140,8 @@ def makeaPost():
 	response = make_response(html_code)
 	return response
 
+#-----------------------------------------------------------------------
+
 @app.route('/addpost', methods=['GET'])
 def addPost():
 	title = flask.request.form.get('title')
@@ -146,6 +149,8 @@ def addPost():
 	tag = flask.request.form.get('tag')
 
 	database.insertData(title, body, tag)
+
+#-----------------------------------------------------------------------
 
 @app.route('/beauty', methods=['GET'])
 def beautyTemplate():
@@ -173,6 +178,8 @@ def foodTemplate():
 
 	response = make_response(html)
 	return response
+
+#-----------------------------------------------------------------------
 
 @app.route('/addresults', methods=['POST'])
 def add_results():
