@@ -6,12 +6,14 @@
 #-----------------------------------------------------------------------
 
 import flask
+# import flask_wtf.csrf
 import os
 import time
 from flask import Flask, render_template, request, make_response, redirect, url_for
 from sys import stderr, argv
 import database
 import auth
+import auth_admin
 
 #-----------------------------------------------------------------------
 
@@ -20,9 +22,21 @@ app = flask.Flask(__name__, template_folder='.')
 
 app.secret_key = 'guercin'
 
-
+# flask_wtf.csrf.CSRFProtect(app)
 #-----------------------------------------------------------------------
 # Routes for authentication.
+
+@app.route('/adminlogout', methods=['GET'])
+def adminlogout():
+    return auth_admin.logout()
+
+@app.route('/adminlogin', methods=['GET'])
+def adminlogin():
+    return auth_admin.login()
+
+@app.route('/handlelogin', methods=['POST'])
+def handle_login():
+    return auth_admin.handle_login()
 
 @app.route('/logoutapp', methods=['GET'])
 def logoutapp():
@@ -34,31 +48,43 @@ def logoutcas():
 
 #-----------------------------------------------------------------------
 
+app.before_request
+def before_request():
+	if not flask.request.is_secure:
+		url = flask.request.url.replace('http://', 'https://', 1)
+		return flask.redirect(url, code=301)
+	return None
+
+#-----------------------------------------------------------------------
+
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
 def index():
-    # username = auth.authenticate()
-    html_code = flask.render_template('index.html')
-    response = flask.make_response(html_code)
-    return response
+	# username = auth.authenticate()
+	# print(username)
+	html_code = flask.render_template('index.html')
+	response = flask.make_response(html_code)
+	return response
 
 #-----------------------------------------------------------------------
 
-@app.route('/profilePage', methods=['GET', 'POST'])
-def profilePageTemplate():
-    # username = auth.authenticate()
+# @app.route('/profilePage', methods=['GET', 'POST'])
+# def profilePageTemplate():
+#     # username = auth.authenticate()
 
-    html_code = flask.render_template('profilePage.html')
-    response = flask.make_response(html_code)
-    return response
+#     html_code = flask.render_template('profilePage.html')
+#     response = flask.make_response(html_code)
+#     return response
 	
 
-#-----------------------------------------------------------------------
+# #-----------------------------------------------------------------------
 
 @app.route('/delete', methods=['GET'])
 def delete():
+	username = auth_admin.authenticate()
 	posts =  database.getData(True)
-	html_code = flask.render_template('delete.html', posts=posts)
+
+	html_code = flask.render_template('delete.html', username=username, posts=posts)
 	response = flask.make_response(html_code)
 	return response
 	
@@ -67,26 +93,26 @@ def delete():
 
 @app.route('/deleteresults', methods=['POST'])
 def deleteresult():
+	username = auth_admin.authenticate()
 	title  = flask.request.form.get('title')
 	# if (title is None) or (title.strip() == ''):
 	# 	return report_results('Missing ISBN', '')
-	# title = title.strip()
-	print(title)
+	title = title.strip()
 	database.delete_post(title)
 
-	message1 = 'The deletion was successful'
+	message1 = 'The deletion done by ' + username+ ' was successful'
 	message2 = 'The database now does not contain a book with Title '
 	message2 += title
 
-	return report_results(message1, message2)
+	return report_results(username, message1, message2)
 	
 
 #-----------------------------------------------------------------------
 
-def report_results(message1, message2):                                                                                                                                  
-
+def report_results(username, message1, message2):                                                                                                                                  
+	
     html_code = flask.render_template('reportresults.html',
-        message1=message1,message2=message2)
+        username=username, message1=message1,message2=message2)
     response = flask.make_response(html_code)
     return response
 

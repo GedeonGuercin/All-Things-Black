@@ -23,6 +23,11 @@ class Post (Base):
     body = sqlalchemy.Column(sqlalchemy.String)
     tag = sqlalchemy.Column(sqlalchemy.String)
 
+class User (Base):
+    __tablename__ = 'users'
+    username =  sqlalchemy.Column(sqlalchemy.String, primary_key=True)
+    password = sqlalchemy.Column(sqlalchemy.String)
+
 engine = sqlalchemy.create_engine(url=DATABASE_URL, pool_pre_ping=True)
 
 # def getFoodposts():
@@ -53,6 +58,16 @@ engine = sqlalchemy.create_engine(url=DATABASE_URL, pool_pre_ping=True)
 #             print(ex, file=sys.stderr)
 #             sys.exit(1)
 #     return posts
+def get_password(username):
+    with sqlalchemy.orm.Session(engine) as session:
+        query = session.query(User).filter(User.username==username)
+        try:
+            row = query.one()
+            return row.password
+        except sqlalchemy.exc.NoResultFound:
+            return None
+
+#-----------------------------------------------------------------------
 
 def getData(type):
 

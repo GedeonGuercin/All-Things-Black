@@ -77,6 +77,7 @@ def authenticate():
     # The user is authenticated, so store the username in
     # the session.
     username = username.strip()
+    print(username)
     flask.session['username'] = username
     return username
 
@@ -99,3 +100,5 @@ def logoutcas():
         + urllib.parse.quote(
             re.sub('logoutcas', 'logoutapp', flask.request.url)))
     flask.abort(flask.redirect(logout_url))
+
+

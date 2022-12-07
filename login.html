@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Penny.com</title>
+    </head>
+    <body>
+        <h1>Login to Delete</h1>
+        <!-- Use post instead of get for security. -->
+        <form action="/handlelogin" method="post">
+            <table>
+                <tr>
+                    <td style="text-align:right">User name:</td>
+                    <td><input type="text" name="admin_username"
+                    required pattern="\S+"
+                    title="No white-space chars">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">Password:</td>
+                    <td><input type="password" name="admin_password"
+                    required pattern="\S+"
+                    title="No white-space chars">
+                    <td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Go"></td>
+                </tr>
+            </table>
+        </form>
+        <br>
+        <strong>{{error_msg}}</strong>
+    </body>
+</html>
