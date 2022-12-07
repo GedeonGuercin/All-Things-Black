@@ -9,7 +9,7 @@
 import database
 import flask
 import werkzeug.security
-from werkzeug.security import generate_password_hash
+# from werkzeug.security import generate_password_hash
 
 
 #-----------------------------------------------------------------------
