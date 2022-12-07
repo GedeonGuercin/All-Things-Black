@@ -17,12 +17,17 @@ import auth_admin
 
 #-----------------------------------------------------------------------
 
-
 app = flask.Flask(__name__, template_folder='.')
+<<<<<<< HEAD
 
 app.secret_key = 'guercin'
 
 # flask_wtf.csrf.CSRFProtect(app)
+=======
+app.secret_key = '93c4828df59a50ae7ea98bbb'
+#app.secret_key = os.getenv('SOME_VAR')
+
+>>>>>>> 34c93af0d052f6af191c6aae5509d527d7c83223
 #-----------------------------------------------------------------------
 # Routes for authentication.
 
@@ -60,12 +65,20 @@ def before_request():
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
 def index():
+<<<<<<< HEAD
 	# username = auth.authenticate()
 	# print(username)
 	html_code = flask.render_template('index.html')
 	response = flask.make_response(html_code)
 	return response
 
+=======
+    username = auth.authenticate()
+    html_code = flask.render_template('index.html',
+        username=username)
+    response = flask.make_response(html_code)
+    return response
+>>>>>>> 34c93af0d052f6af191c6aae5509d527d7c83223
 #-----------------------------------------------------------------------
 
 # @app.route('/profilePage', methods=['GET', 'POST'])
@@ -95,6 +108,7 @@ def delete():
 def deleteresult():
 	username = auth_admin.authenticate()
 	title  = flask.request.form.get('title')
+<<<<<<< HEAD
 	# if (title is None) or (title.strip() == ''):
 	# 	return report_results('Missing ISBN', '')
 	title = title.strip()
@@ -102,11 +116,17 @@ def deleteresult():
 
 	message1 = 'The deletion done by ' + username+ ' was successful'
 	message2 = 'The database now does not contain a book with Title '
+=======
+	print(title)
+	database.delete_post(title)
+
+	message1 = 'The deletion was successful'
+	message2 = 'The database now does not contain a post with Title '
+>>>>>>> 34c93af0d052f6af191c6aae5509d527d7c83223
 	message2 += title
 
 	return report_results(username, message1, message2)
 	
-
 #-----------------------------------------------------------------------
 
 def report_results(username, message1, message2):                                                                                                                                  
@@ -132,6 +152,7 @@ def search_results():
     return response
 
 # ----------------------------------------------------------------------
+
 @app.route('/home', methods=['GET'])
 def homeTemplate():
 	title = flask.request.form.get('title')
@@ -142,6 +163,8 @@ def homeTemplate():
 
 	response = make_response(html)
 	return response
+
+#-----------------------------------------------------------------------
 
 @app.route('/aboutUs', methods=['GET'])
 def aboutUsTemplate():
@@ -157,6 +180,7 @@ def aboutUsTemplate():
 	return response
 
 #-----------------------------------------------------------------------
+
 @app.route('/post', methods=['GET'])
 def makeaPost():
 	title = flask.request.args.get('title')
@@ -168,6 +192,8 @@ def makeaPost():
 	response = make_response(html_code)
 	return response
 
+#-----------------------------------------------------------------------
+
 @app.route('/addpost', methods=['GET'])
 def addPost():
 	title = flask.request.form.get('title')
@@ -175,6 +201,8 @@ def addPost():
 	tag = flask.request.form.get('tag')
 
 	database.insertData(title, body, tag)
+
+#-----------------------------------------------------------------------
 
 @app.route('/beauty', methods=['GET'])
 def beautyTemplate():
@@ -203,17 +231,13 @@ def foodTemplate():
 	response = make_response(html)
 	return response
 
+#-----------------------------------------------------------------------
+
 @app.route('/addresults', methods=['POST'])
 def add_results():
 	title = flask.request.form.get('title')
-	if (title is None) or (title == ''):
-		return 'Enter something'
 	body = flask.request.form.get('body')
-	if (body is None) or (body == ''):
-		return 'Enter something'
 	tag = flask.request.form.get('tag')
-	if (tag is None) or (tag == ''):
-		return 'Enter something'
 
 	print(title)
 	print(body)
