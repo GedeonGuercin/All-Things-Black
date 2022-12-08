@@ -42,6 +42,8 @@ def handle_login():
 
     username = flask.request.form.get('admin_username')
     password = flask.request.form.get('admin_password')
+    print(username)
+    print(password)
     if username is None:
         return flask.redirect(
         flask.url_for('adminlogin', error_msg='Invalid login'))
@@ -52,7 +54,7 @@ def handle_login():
     if not _valid_username_and_password(username, password):
         return flask.redirect(
         flask.url_for('adminlogin', error_msg='Invalid login'))
-    original_url = flask.session.get('original_url', '/index')
+    original_url = flask.session.get('original_url', '/delete')
     response = flask.redirect(original_url)
     flask.session['admin_username'] = username
     return response
@@ -69,7 +71,7 @@ def logout():
 
 def authenticate():
     username = flask.session.get('admin_username')
-    print(username)
+    # print(username)
     if username is None:
         response = flask.redirect(flask.url_for('adminlogin'))
         flask.session['original_url'] = flask.request.url

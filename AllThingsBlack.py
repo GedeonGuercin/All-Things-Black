@@ -94,11 +94,11 @@ def deleteresult():
 	title  = flask.request.form.get('title')
 	# if (title is None) or (title.strip() == ''):
 	# 	return report_results('Missing ISBN', '')
-	# title = title.strip()
-	print(title)
+	title = title.strip()
+	# print(title)
 	database.delete_post(title)
 
-	message1 = 'The deletion was successful'
+	message1 = 'The deletion done by ' + username+ ' was successful'
 	message2 = 'The database now does not contain a book with Title '
 	message2 += title
 
