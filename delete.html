@@ -26,7 +26,7 @@
             <!-- <input type="text" name="title" autofocus required pattern=".*\S.*" title="At least one non-white-space char"> -->
             <br>
             <select name="title" class="form-control" id="title">
-                {% for element in posts %}    
+                {% for element in posts[::-1] %}    
                 <option value="{{element[0]}}">{{element[0]}}</option>     
                 {% endfor %} 
             </select>

@@ -20,7 +20,7 @@
     <!-- page section -->
     <section class="page-section">
         <div class="card ">
-            {% for element in posts %}   
+            {% for element in posts[::-1] %}   
             <div class="card-header text-bg-primary mb-3">
                 <strong>{{element[2]}}</strong>
             </div>
