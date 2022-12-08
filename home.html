@@ -13,6 +13,22 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
         {% include 'navbar.html' %}
+    
+        <style>
+            .fa {
+              font-size: 30px;
+              cursor: pointer;
+              user-select: none;
+            }
+            
+            .fa:hover {
+              /* color: darkblue; */
+              background-color: white !important;
+              border-radius: 6px;
+              color: #cc0011;
+            }
+        </style>
+
 
     <div class="container-fluid text-center pb-1" style="background-color:orange; color:white">
         <h1>Home Page</h1>
@@ -24,25 +40,29 @@
     
     <!-- page section -->
     <section class="page-section">
-       <div class = "container py-4 py-lg-5">
-            <div class="col-md-12"> 
-                <div id="listings">
-                    <div class="list-group">
-                        <a class="list-group-item list-group-item-action flex-column align-items-start">
-                        {% for element in posts %}    
-                        <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">{{element[0]}}</h5>
-                                <small>{{element[2]}}</small>
-                            </div>
-                            <p class="mb-1">{{element[1]}}</p>
-                            <hr>
-                            {% endfor %}   
-                        </a>
-                    </div>
-                    </div>
-            </div>
-       </div>
-    </section>
+             <div class="card ">
+                 {% for element in posts %}   
+                 <div class="card-header text-bg-primary mb-3">
+                     <strong>{{element[2]}}</strong>
+                 </div>
+                 <div class="card-body">
+                   <h5 class="card-title">{{element[0]}}</h5>
+                   <p class="card-text">{{element[1]}}</p>
+                   <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                   <i onclick="myFunction(this)" class="fa fa-thumbs-up"></i>
+ 
+                     <script>
+                     function myFunction(x) {
+                     x.classList.toggle("fa-thumbs-down");
+                     }
+                     </script>
+                 </div>
+                 <br>
+                 <hr>
+                 {% endfor %} 
+               </div>
+        </div>
+     </section>
     <div class="row fixed-bottom">
         <footer class="bg-light py-3">
             
