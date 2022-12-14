@@ -219,7 +219,7 @@ def add_results():
 	print(title)
 	print(body)
 	print(tag)
-
+	
 	database.addPost(title, body, tag)
 	
 	return homeTemplate()
