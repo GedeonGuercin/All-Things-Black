@@ -58,8 +58,8 @@ def before_request():
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
 def index():
-    username = auth.authenticate()
-    html_code = flask.render_template('index.html', username=username)
+    # username = auth.authenticate() , username=username
+    html_code = flask.render_template('index.html')
     response = flask.make_response(html_code)
     return response
 
@@ -219,7 +219,7 @@ def add_results():
 	print(title)
 	print(body)
 	print(tag)
-	
+
 	database.addPost(title, body, tag)
 	
 	return homeTemplate()
