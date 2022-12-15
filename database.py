@@ -176,6 +176,13 @@ def delete_post(title):
         session.query(Post).filter(Post.title==title).delete()
         session.commit()
 
-if __name__ == '__main__':
-    main()
+#-----------------------------------------------------------------------
+# For testing:
 
+# def _test():
+#     successful = addPost('Food', 'Butler Basement', 'food')
+#     print(successful)
+
+
+# if __name__ == '__main__':
+#     # _test()
