@@ -177,12 +177,14 @@ def delete_post(title):
         session.commit()
 
 #-----------------------------------------------------------------------
-# For testing:
+#For testing:
 
 # def _test():
 #     successful = addPost('Food', 'Butler Basement', 'food')
+#     delete = delete_post('Food')
 #     print(successful)
+#     print(delete)
 
 
 # if __name__ == '__main__':
-#     # _test()
+#     _test()
