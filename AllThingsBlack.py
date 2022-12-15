@@ -6,9 +6,6 @@
 #-----------------------------------------------------------------------
 
 import flask
-# import flask_wtf.csrf
-import os
-import time
 from flask import Flask, render_template, request, make_response, redirect, url_for
 from sys import stderr, argv
 import database
@@ -65,17 +62,6 @@ def index():
 
 #-----------------------------------------------------------------------
 
-# @app.route('/profilePage', methods=['GET', 'POST'])
-# def profilePageTemplate():
-#     # username = auth.authenticate()
-
-#     html_code = flask.render_template('profilePage.html')
-#     response = flask.make_response(html_code)
-#     return response
-	
-
-# #-----------------------------------------------------------------------
-
 @app.route('/delete', methods=['GET'])
 def delete():
 	username = auth_admin.authenticate()
@@ -92,10 +78,8 @@ def delete():
 def deleteresult():
 	username = auth_admin.authenticate()
 	title  = flask.request.form.get('title')
-	# if (title is None) or (title.strip() == ''):
-	# 	return report_results('Missing ISBN', '')
 	title = title.strip()
-	# print(title)
+	#print(title)
 	database.delete_post(title)
 
 	message1 = 'The deletion done by ' + username+ ' was successful'
@@ -115,28 +99,15 @@ def report_results(username, message1, message2):
 
 # ----------------------------------------------------------------------
 
-@app.route('/searchresults', methods=['GET'])
-def search_results():
-
-    title = flask.request.args.get('title')
-
-    users = database.getData(False) # Exception handling omitted                                                                                                                                   
-
-    html_code = flask.render_template('searchresults.html',
-        title=title,
-        posts=users)
-    response = flask.make_response(html_code)
-    return response
-
-# ----------------------------------------------------------------------
-
 @app.route('/home', methods=['GET'])
 def homeTemplate():
+	username = auth.authenticate() 
 	title = flask.request.form.get('title')
 	body = flask.request.form.get('body')
 	tag = flask.request.form.get('tag')
 	posts =  database.getData(True)
-	html = flask.render_template('home.html', posts=posts, title=title, body=body,tag=tag)
+	html = flask.render_template('home.html', 
+	posts=posts, title=title, body=body,tag=tag,username=username)
 
 	response = make_response(html)
 	return response
@@ -145,13 +116,8 @@ def homeTemplate():
 
 @app.route('/aboutUs', methods=['GET'])
 def aboutUsTemplate():
-	# username = auth().authenticate()
-	# username = username.strip()
-	# client_token = generate_client_token()
-
-	# html = flask.render_template(
-	# 	'aboutUs.html', username=username)
-	html = flask.render_template('aboutUs.html')
+	username = auth.authenticate() 
+	html = flask.render_template('aboutUs.html',username=username)
 
 	response = make_response(html)
 	return response
@@ -160,12 +126,13 @@ def aboutUsTemplate():
 
 @app.route('/post', methods=['GET'])
 def makeaPost():
+	username = auth.authenticate() 
 	title = flask.request.args.get('title')
 	post = flask.request.args.get('post')
 	print(title)
 	print(post)
 
-	html_code = flask.render_template('makeApost.html')
+	html_code = flask.render_template('makeApost.html',username=username)
 	response = make_response(html_code)
 	return response
 
@@ -183,8 +150,9 @@ def addPost():
 
 @app.route('/beauty', methods=['GET'])
 def beautyTemplate():
+	username = auth.authenticate() 
 	posts = database.getData('beauty')
-	html = flask.render_template('beautypage.html', posts=posts)
+	html = flask.render_template('beautypage.html', posts=posts,username=username)
 
 	response = make_response(html)
 	return response
@@ -192,8 +160,9 @@ def beautyTemplate():
 
 @app.route('/events', methods=['GET'])
 def eventsTemplate():
+	username = auth.authenticate() 
 	posts = database.getData('events')
-	html = flask.render_template('eventspage.html', posts=posts)
+	html = flask.render_template('eventspage.html', posts=posts,username=username)
 
 	response = make_response(html)
 	return response
@@ -202,8 +171,9 @@ def eventsTemplate():
 
 @app.route('/food', methods=['GET'])
 def foodTemplate():
+	username = auth.authenticate() 
 	posts = database.getData('food')
-	html = flask.render_template('foodpage.html', posts=posts)
+	html = flask.render_template('foodpage.html', posts=posts,username=username)
 
 	response = make_response(html)
 	return response
