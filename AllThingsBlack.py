@@ -7,6 +7,7 @@
 
 import flask
 from flask import make_response
+import os
 import database
 import auth
 import auth_admin
@@ -14,8 +15,7 @@ import auth_admin
 #-----------------------------------------------------------------------
 
 app = flask.Flask(__name__, template_folder='.')
-app.secret_key = '93c4828df59a50ae7ea98bbb'
-#app.secret_key = os.getenv('SOME_VAR')
+app.secret_key = os.getenv('SOME_VAR')
 
 #-----------------------------------------------------------------------
 # Routes for authentication.
