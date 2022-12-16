@@ -6,8 +6,7 @@
 #-----------------------------------------------------------------------
 
 import flask
-from flask import Flask, render_template, request, make_response, redirect, url_for
-from sys import stderr, argv
+from flask import make_response
 import database
 import auth
 import auth_admin
@@ -51,6 +50,7 @@ def before_request():
 	return None
 
 #-----------------------------------------------------------------------
+# Route for the home page.
 
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
@@ -61,6 +61,7 @@ def index():
     return response
 
 #-----------------------------------------------------------------------
+# Route for the delete page.
 
 @app.route('/delete', methods=['GET'])
 def delete():
@@ -73,13 +74,14 @@ def delete():
 	
 
 #-----------------------------------------------------------------------
+# Route for error messages on the delete page
 
 @app.route('/deleteresults', methods=['POST'])
 def deleteresult():
 	username = auth_admin.authenticate()
 	title  = flask.request.form.get('title')
 	title = title.strip()
-	#print(title)
+	print(title)
 	database.delete_post(title)
 
 	message1 = 'The deletion done by ' + username+ ' was successful'
@@ -89,6 +91,8 @@ def deleteresult():
 	return report_results(username, message1, message2)
 	
 #-----------------------------------------------------------------------
+# Function to generate the reportresults.html page that reports the 
+# results when a deletion occurs.
 
 def report_results(username, message1, message2):                                                                                                                                  
 	
@@ -98,6 +102,7 @@ def report_results(username, message1, message2):
     return response
 
 # ----------------------------------------------------------------------
+# Route for the page with all posts
 
 @app.route('/all', methods=['GET'])
 def allTemplate():
@@ -113,6 +118,7 @@ def allTemplate():
 	return response
 
 #-----------------------------------------------------------------------
+# Route for the page with information about us.
 
 @app.route('/aboutUs', methods=['GET'])
 def aboutUsTemplate():
@@ -123,6 +129,7 @@ def aboutUsTemplate():
 	return response
 
 #-----------------------------------------------------------------------
+# Route for the page to add a post.
 
 @app.route('/post', methods=['GET'])
 def makeaPost():
@@ -137,6 +144,7 @@ def makeaPost():
 	return response
 
 #-----------------------------------------------------------------------
+# Route for the beauty page.
 
 @app.route('/beauty', methods=['GET'])
 def beautyTemplate():
@@ -147,6 +155,7 @@ def beautyTemplate():
 	response = make_response(html)
 	return response
 #-----------------------------------------------------------------------
+# Route for the events page.
 
 @app.route('/events', methods=['GET'])
 def eventsTemplate():
@@ -158,6 +167,7 @@ def eventsTemplate():
 	return response
 	
 #-----------------------------------------------------------------------
+# Route for the food page.
 
 @app.route('/food', methods=['GET'])
 def foodTemplate():
@@ -169,6 +179,7 @@ def foodTemplate():
 	return response
 
 #-----------------------------------------------------------------------
+# Route to add user input to pages
 
 @app.route('/addresults', methods=['POST'])
 def add_results():

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #-----------------------------------------------------------------------
-# auth.py
+# auth_admin.py
 # Authors: Alex Halderman, Scott Karlin, Brian Kernighan, Bob Dondero
 #-----------------------------------------------------------------------
 
@@ -9,13 +9,12 @@
 import database
 import flask
 import werkzeug.security
-# from werkzeug.security import generate_password_hash
 
 
 #-----------------------------------------------------------------------
-
+# Validate a username and password. If None, return False; else return
+# hashed password
 def _valid_username_and_password(username, password):
-
     stored_password = database.get_password(username)
     # print(stored_password)
     # print(generate_password_hash('xxx'))
@@ -25,7 +24,7 @@ def _valid_username_and_password(username, password):
     stored_password, password)
 
 #-----------------------------------------------------------------------
-
+# Validate a login.
 def login():
     error_msg = flask.request.args.get('error_msg')
     if error_msg is None:
@@ -37,7 +36,7 @@ def login():
     return response
 
 #-----------------------------------------------------------------------
-
+# Retrieves log-in information and handles errors
 def handle_login():
 
     username = flask.request.form.get('admin_username')
@@ -60,7 +59,7 @@ def handle_login():
     return response
 
 #-----------------------------------------------------------------------
-
+# Log out of the application.
 def logout():
     flask.session.clear()
     html_code = flask.render_template('loggedout.html')
@@ -68,7 +67,8 @@ def logout():
     return response
 
 #-----------------------------------------------------------------------
-
+# Authenticate the remote user, and return the user's username.
+# Do not return unless the user is successfully authenticated as an admin.
 def authenticate():
     username = flask.session.get('admin_username')
     # print(username)

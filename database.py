@@ -11,7 +11,7 @@ import sqlalchemy.orm
 import sqlalchemy.ext.declarative
 
 #-----------------------------------------------------------------------
-
+# Database connections
 DATABASE_URL = 'postgresql://rmqiknfc:7HnJzw444FmWxxE_2t_OgbVzABcY6en6@castor.db.elephantsql.com/rmqiknfc'
 Base =  sqlalchemy.ext.declarative.declarative_base()
 
@@ -29,7 +29,7 @@ class User (Base):
 engine = sqlalchemy.create_engine(url=DATABASE_URL, pool_pre_ping=True)
 
 #-----------------------------------------------------------------------
-
+# Given a password, authentication
 def get_password(username):
     with sqlalchemy.orm.Session(engine) as session:
         query = session.query(User).filter(User.username==username)
@@ -40,7 +40,7 @@ def get_password(username):
             return None
 
 #-----------------------------------------------------------------------
-
+# Handles filtering of pages
 def getData(type):
     if type == True:
         try:
@@ -154,7 +154,7 @@ def getData(type):
         return posts
 
 #-----------------------------------------------------------------------
-
+# Adds a post to the database
 def addPost(title, body, tag):
     with sqlalchemy.orm.Session(engine) as session:
         row = Post(title=title, body=body, tag=tag)
@@ -170,7 +170,7 @@ def addPost(title, body, tag):
             return False
 
 #-----------------------------------------------------------------------
-
+# Deletes a post from the database
 def delete_post(title):
     with sqlalchemy.orm.Session(engine) as session:
         session.query(Post).filter(Post.title==title).delete()
