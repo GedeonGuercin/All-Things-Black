@@ -99,14 +99,14 @@ def report_results(username, message1, message2):
 
 # ----------------------------------------------------------------------
 
-@app.route('/home', methods=['GET'])
-def homeTemplate():
+@app.route('/all', methods=['GET'])
+def allTemplate():
 	username = auth.authenticate() 
 	title = flask.request.form.get('title')
 	body = flask.request.form.get('body')
 	tag = flask.request.form.get('tag')
 	posts =  database.getData(True)
-	html = flask.render_template('home.html', 
+	html = flask.render_template('all.html', 
 	posts=posts, title=title, body=body,tag=tag,username=username)
 
 	response = make_response(html)
@@ -135,16 +135,6 @@ def makeaPost():
 	html_code = flask.render_template('makeApost.html',username=username)
 	response = make_response(html_code)
 	return response
-
-#-----------------------------------------------------------------------
-
-@app.route('/addpost', methods=['GET'])
-def addPost():
-	title = flask.request.form.get('title')
-	body = flask.request.form.get('body')
-	tag = flask.request.form.get('tag')
-
-	database.insertData(title, body, tag)
 
 #-----------------------------------------------------------------------
 
@@ -192,4 +182,4 @@ def add_results():
 
 	database.addPost(title, body, tag)
 	
-	return homeTemplate()
+	return allTemplate()
